@@ -2,8 +2,6 @@ package com.badword;
 
 import com.badword.method.AddRemove;
 import com.badword.words.BadWords;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
@@ -14,7 +12,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class BadWordFiltering implements BadWords, AddRemove {
 
-    private final Set<String> set = new HashSet<>(List.of(words));
+    private final Set<String> set = new HashSet<>(List.of(koreaWord1));
     private String substituteValue = "*";
 
     //대체 문자 지정
@@ -67,6 +65,7 @@ public class BadWordFiltering implements BadWords, AddRemove {
         }
     }
 
+    //값을 반환
     public String checkAndModify(String text) {
         String cpText = String.copyValueOf(text.toCharArray());
         checkAndChange(cpText);
@@ -77,5 +76,11 @@ public class BadWordFiltering implements BadWords, AddRemove {
     public boolean check(String text) {
         return set.stream()
                 .anyMatch(text::contains);
+    }
+
+    //공백을 없는 상태 체크
+    public boolean blankCheck(String text) {
+        String cpText = text.replace(" ", "");
+        return check(cpText);
     }
 }
