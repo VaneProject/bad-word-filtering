@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public interface ReadFile extends EditWord {
-    default void addFile(File file, String delim, boolean rmBlank) {
+    default void readFile(File file, String delim, boolean rmBlank) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             StringBuilder fileContent = new StringBuilder();
             reader.lines().forEach(fileContent::append);
@@ -24,31 +24,31 @@ public interface ReadFile extends EditWord {
         }
     }
 
-    default void addFile(String path) {
-        addFile(path, null, true);
+    default void readFile(String path) {
+        readFile(path, null, true);
     }
 
-    default void addFile(String path, String delim) {
-        addFile(path, delim, true);
+    default void readFile(String path, String delim) {
+        readFile(path, delim, true);
     }
 
-    default void addFile(String path, boolean rmBlank) {
-        addFile(path, null, rmBlank);
+    default void readFile(String path, boolean rmBlank) {
+        readFile(path, null, rmBlank);
     }
 
-    default void addFile(String path, String delim, boolean rmBlank) {
-        addFile(new File(path), delim, rmBlank);
+    default void readFile(String path, String delim, boolean rmBlank) {
+        readFile(new File(path), delim, rmBlank);
     }
 
-    default void addFile(File file) {
-        addFile(file, null, true);
+    default void readFile(File file) {
+        readFile(file, null, true);
     }
 
-    default void addFile(File file, String delim) {
-        addFile(file, delim, true);
+    default void readFile(File file, String delim) {
+        readFile(file, delim, true);
     }
 
-    default void addFile(File file, boolean rmBlank) {
-        addFile(file, null, rmBlank);
+    default void readFile(File file, boolean rmBlank) {
+        readFile(file, null, rmBlank);
     }
 }
