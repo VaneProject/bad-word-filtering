@@ -74,14 +74,14 @@ if (test) {
 
 # 동작 예제
 욕은 '욕설'로 대체하여 사용합니다.<br>
-### checkAndChange와 생성자
+### change와 생성자
 ```java
 Sring bad = "욕설을 욕설 말하는 중";
 BadWordFiltering badWordFiltering1 = new BadWordFiltering();
 BadWordFiltering badWordFiltering2 = new BadWordFiltering("-");
 
-String text1 = badWordFiltering.checkAndChange(bad);	//기본값 *
-String text2 = badWordFiltering.checkAndChange(bad);	//입력값 -
+String text1 = badWordFiltering.change(bad);	//기본값 *
+String text2 = badWordFiltering.change(bad);	//입력값 -
 System.out.println(text1);
 System.out.println(text2);
 
@@ -113,6 +113,93 @@ false
 true
 true
 true
+```
+
+---
+# 업데이트(23/04/11)
+## 변경 사항
+`checkAndChange(String)` -> `change(String)`로 메소드명칭이 변경되었습니다.
+
+
+## 추가 사항
+### change(String, String[])
+- 리턴 타입 : String
+- 파라미터 : `(필터링할 텍스트, 확인할 특수기호)`
+- 설명 : 받은 텍스트에 욕설중간에 특수기호등으로 넣어두어도 필터링하는 기능
+
+#### 예시 코드
+**필터링될 문자는 욕설로 대체합니다.**
+```java
+BadWordFiltering filtering = new BadWordFiltering();
+System.out.println(filtering.change("욕_설", new String[] {"_"}));
+
+출력
+***
+```
+
+### readURL(URL, String, boolean)
+- 리턴 타입 : void
+- 파라미터
+```
+링크(URL): 욕설 리스트가 정리되어 있는 링크
+
+기호(String): 잘라낼 기준의 기호들 (예시: "+-"일때 "+", "-"기준으로 잘라냄) (기본값: 공백)
+
+양끝 공백 허용(boolean): 양끝 공백을 제거 허용 (기본: true)
+```
+- 관련 메소드
+```java
+readURL(URL): 기호와 양끝 공백를 기본값으로 사용 
+readURL(URL, String): 양끝 공백을 기본값으로 사용
+readURL(URL, boolean): 기호를 기본값으로 잘라내기
+readURL(String): URL타입이 아닌 String 타입으로 입력
+readURL(String, String): URL과 동일
+readURL(String, boolean): URL과 동일
+readURL(String, String, boolean): URL과 동일
+```
+- 설명: 욕설이 적혀있는 파일를 읽은뒤에 잘라낼 기호의 기준으로 잘라내어 단어를 추가하는 로직
+
+#### 코드 예시
+```java
+BadWordFiltering filtering = new BadWordFiltering();
+String url = "https://raw.githubusercontent.com/PersesTitan/BadWordFiltering/master/badwords.txt";
+// ex1)
+filtering.readURL(url, ",");
+// ex2)
+filtering.readURL(new URL(url), ",");
+```
+
+### readFile(File, String, boolean)
+- 리턴 타입 : void
+- 파라미터
+```
+file(File): 욕설 리스트가 정리되어 있는 파일
+
+기호(String): 잘라낼 기준의 기호들 (예시: "+-"일때 "+", "-"기준으로 잘라냄) (기본값: 공백)
+
+양끝 공백 허용(boolean): 양끝 공백을 제거 허용 (기본: true)
+```
+- 관련 메소드
+```java
+readFile(File): 기호와 양끝 공백를 기본값으로 사용
+readFile(File, String): 양끝 공백을 기본값으로 사용
+readFile(File, boolean): 기호를 기본값으로 잘라내기
+readFile(String): File타입이 아닌 String 타입으로 경로 입력
+readFile(String, String): File과 동일
+readFile(String, boolean): File과 동일
+readFile(String, String, boolean): File과 동일
+```
+- 설명: 욕설이 적혀있는 링크를 읽은뒤에 잘라낼 기호의 기준으로 잘라내어 단어를 추가하는 로직
+
+#### 코드 예시
+```java
+BadWordFiltering filtering = new BadWordFiltering();
+
+String filePath = "badwords.txt";
+// ex1)
+filtering.readFile(filePath, ",");
+// ex2)
+filtering.readFile(new File(filePath), ",");
 ```
 
 ---
