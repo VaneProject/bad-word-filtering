@@ -1,6 +1,8 @@
 package com.badword;
 
-import com.badword.method.AddRemove;
+import com.badword.method.EditWord;
+import com.badword.method.ReadFile;
+import com.badword.method.ReadURL;
 import com.badword.words.BadWords;
 
 import java.util.HashSet;
@@ -8,8 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BadWordFiltering implements BadWords, AddRemove {
-
+public class BadWordFiltering implements BadWords, ReadFile {
     private final Set<String> set = new HashSet<>(List.of(koreaWord1));
     private String substituteValue = "*";
 
@@ -22,6 +23,11 @@ public class BadWordFiltering implements BadWords, AddRemove {
     public BadWordFiltering() {}
 
     //특정 문자 추가, 삭제
+    @Override
+    public void add(String text) {
+        set.add(text);
+    }
+
     @Override
     public void add(String...texts) {
         set.addAll(List.of(texts));
@@ -75,7 +81,6 @@ public class BadWordFiltering implements BadWords, AddRemove {
 
     //공백을 없는 상태 체크
     public boolean blankCheck(String text) {
-        String cpText = text.replace(" ", "");
-        return check(cpText);
+        return check(text.replace(" ", ""));
     }
 }

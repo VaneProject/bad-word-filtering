@@ -3,7 +3,8 @@ package com.badword.method;
 import java.util.List;
 import java.util.Set;
 
-public interface AddRemove {
+public interface EditWord {
+    void add(String text);
     void add(String...texts);
     void add(List<String> texts);
     void add(Set<String> texts);
