@@ -1,7 +1,5 @@
 package com.badword.words;
 
-import java.util.regex.Pattern;
-
 public interface BadWords {
     String[] koreaWord1 = {
         "ㅅㅂ", "씨발", "씨바", "개세끼", "18년", "18놈", "18새끼", "ㄱㅐㅅㅐㄲl", "ㄱㅐㅈㅏ", "가슴만져", "가슴빨아", "가슴빨어", "가슴조물락", "가슴주물럭", "가슴쪼물딱", 
