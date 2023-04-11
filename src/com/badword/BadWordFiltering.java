@@ -1,6 +1,5 @@
 package com.badword;
 
-import com.badword.method.EditWord;
 import com.badword.method.ReadFile;
 import com.badword.method.ReadURL;
 import com.badword.words.BadWords;
@@ -8,9 +7,9 @@ import com.badword.words.BadWords;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.regex.Pattern;
 
-public class BadWordFiltering implements BadWords, ReadFile {
+public class BadWordFiltering implements BadWords, ReadFile, ReadURL {
     private final Set<String> set = new HashSet<>(List.of(koreaWord1));
     private String substituteValue = "*";
 
@@ -59,15 +58,27 @@ public class BadWordFiltering implements BadWords, ReadFile {
     }
 
     //비속어 있다면 대체
-    public String checkAndChange(String text) {
-        Set<String> s = set.stream()
-                .filter(text::contains)
-                .collect(Collectors.toSet());
-
-        for (String v : s) {
-            int textLen = v.length();
-            String sub = this.substituteValue.repeat(textLen);
+    public String change(String text) {
+        String[] words = set.stream().filter(text::contains).toArray(String[]::new);
+        for (String v : words) {
+            String sub = this.substituteValue.repeat(v.length());
             text = text.replace(v, sub);
+        }
+        return text;
+    }
+
+    public String change(String text, String[] sings) {
+        StringBuilder singBuilder = new StringBuilder("[");
+        for (String sing : sings) singBuilder.append(Pattern.quote(sing));
+        singBuilder.append("]*");
+        String patternText = singBuilder.toString();
+
+        for (String word : set) {
+            if (word.length() == 1) text = text.replace(word, substituteValue);
+            String[] chars = word.chars().mapToObj(Character::toString).toArray(String[]::new);
+            text = Pattern.compile(String.join(patternText, chars))
+                    .matcher(text)
+                    .replaceAll(v -> substituteValue.repeat(v.group().length()));
         }
 
         return text;
