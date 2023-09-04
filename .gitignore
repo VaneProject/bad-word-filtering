@@ -6,7 +6,6 @@
 *.iml
 out
 gen
-/.gradle/
 
 .gradle
 build/

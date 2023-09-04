@@ -1,6 +1,4 @@
-package com.badword;
-
-import java.io.File;
+import com.vane.badwordfiltering.BadWordFiltering;
 
 class BadWordFilteringTest {
     public static void main(String[] args) {
