@@ -1,4 +1,4 @@
-package com.badword.method;
+package com.vane.badwordfiltering;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,9 +6,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Set;
 import java.util.StringTokenizer;
 
-public interface ReadURL extends EditWord {
+interface ReadURL extends Set<String> {
     default void readURL(URL url, String delim, boolean rmBlank) {
         try (InputStream is = url.openConnection().getInputStream();
              BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {

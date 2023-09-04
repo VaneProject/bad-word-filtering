@@ -1,12 +1,13 @@
-package com.badword.method;
+package com.vane.badwordfiltering;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Set;
 import java.util.StringTokenizer;
 
-public interface ReadFile extends EditWord {
+interface ReadFile extends Set<String> {
     default void readFile(File file, String delim, boolean rmBlank) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             StringBuilder fileContent = new StringBuilder();
