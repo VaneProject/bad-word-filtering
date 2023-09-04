@@ -5,7 +5,7 @@
 <br>
 <span style="color: pink">현재 라이브러리에 단어를 추가중입니다. 관심이 있으신 분은 아래 링크를 통하여 단어 추가에 협력부탁드립니다.</span><br>
 
-[욕/비속어 코드 링크 바로가기](https://github.com/PersesTitan/BadWordFiltering/blob/master/src/com/badword/words/BadWords.java)
+[욕/비속어 코드 링크 바로가기](https://github.com/VaneProject/bad-word-filtering/blob/master/src/main/java/com/vane/badwordfiltering/BadWords.java)
 
 <br>
 <br>
