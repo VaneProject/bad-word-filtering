@@ -7,6 +7,31 @@
 
 [욕/비속어 코드 링크 바로가기](https://github.com/VaneProject/bad-word-filtering/blob/master/src/main/java/com/vane/badwordfiltering/BadWords.java)
 
+### 블로그
+- [[Java] BadWordFiltering (욕, 비속어 필터 라이브러리)](https://persestitan.tistory.com/70)
+- [[Java] BadWordFiltering 2 (욕설 필터링 라이브러리)](https://persestitan.tistory.com/71)
+- [[Java] BadWordFiltering 3 (라이브러리 배포 안내)](https://persestitan.tistory.com/115)
+
+### 라이브러리
+maven
+```xml
+<dependency>
+    <groupId>io.github.vaneproject</groupId>
+    <artifactId>badwordfiltering</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+gradle
+```groovy
+implementation 'io.github.vaneproject:badwordfiltering:1.0.0'
+```
+
+gradle (Kotlin)
+```kotlin
+implementation("io.github.vaneproject:badwordfiltering:1.0.0")
+```
+
 <br>
 <br>
 
@@ -201,9 +226,3 @@ filtering.readFile(filePath, ",");
 // ex2)
 filtering.readFile(new File(filePath), ",");
 ```
-
----
-
-
-[블로그 링크](https://velog.io/@persestitan/Java-BadWordFiltering-%EC%9A%95-%EB%B9%84%EC%86%8D%EC%96%B4-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC)<br>
-[욕/비속어 코드 링크 바로가기](https://github.com/VaneProject/bad-word-filtering/blob/master/src/main/java/com/vane/badwordfiltering/BadWords.java)<br>
