@@ -206,4 +206,4 @@ filtering.readFile(new File(filePath), ",");
 
 
 [블로그 링크](https://velog.io/@persestitan/Java-BadWordFiltering-%EC%9A%95-%EB%B9%84%EC%86%8D%EC%96%B4-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC)<br>
-[욕/비속어 코드 링크 바로가기](https://github.com/PersesTitan/BadWordFiltering/blob/master/src/com/badword/words/BadWords.java)<br>
+[욕/비속어 코드 링크 바로가기](https://github.com/VaneProject/bad-word-filtering/blob/master/src/main/java/com/vane/badwordfiltering/BadWords.java)<br>
