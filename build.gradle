@@ -1,19 +1,92 @@
 plugins {
     id 'java'
+//    id 'maven-publish'
+//    id 'signing'
 }
 
-group = 'org.vane'
-version = '1.0-SNAPSHOT'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+//tasks.register('sourcesJar', Jar) {
+//    from sourceSets.main.allSource
+//    archiveClassifier.set 'sources'
+//}
+//
+//tasks.register('javadocJar', Jar) {
+//    from sourceSets.main.java.srcDirs
+//    archiveClassifier.set 'javadoc'
+//}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
 }
 
-test {
-    useJUnitPlatform()
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+group = "io.github.vaneproject"
+archivesBaseName = "badwordfiltering"
+version = "1.0.0"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name = 'bad-word-filtering'
+                packaging = 'jar'
+                description = 'bad word filtering java code'
+                url = 'https://github.com/VaneProject/bad-word-filtering'
+
+                scm {
+                    connection = 'scm:git:github.com/VaneProject/bad-word-filtering.git'
+                    developerConnection = 'scm:git:ssh://github.com:VaneProject/bad-word-filtering.git'
+                    url = 'https://github.com/VaneProject/bad-word-filtering/tree/master'
+                }
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/VaneProject/bad-word-filtering/blob/master/LICENSE'
+                    }
+                }
+
+                developers {
+                    developer {
+                        name = 'PersesTitan'
+                        email = 'ToramPersesTitan@gmail.com'
+                        organization = "VaneProject"
+                        organizationUrl = 'https://github.com/VaneProject'
+                    }
+                }
+            }
+        }
+    }
 }
